@@ -24,6 +24,7 @@ public class Gui extends JFrame {
 	private ManagerGui managerPanel = null;
 
 
+	// Test commit
 	Gui() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
