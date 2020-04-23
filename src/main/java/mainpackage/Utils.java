@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.apache.commons.math3.geometry.spherical.oned.ArcsSet.Split;
+//import org.apache.commons.math3.geometry.spherical.oned.ArcsSet.Split;
 
 public class Utils {
 	protected static boolean IsInteger(String str) {
@@ -78,7 +77,7 @@ public class Utils {
 			// bwr = new BufferedWriter(
 			// new FileWriter(new File(new
 			// SimpleDateFormat("HHmmss-ddMMyyyy'.txt'").format(new Date()))));
-			bwr = new BufferedWriter(new FileWriter(new File("log.txt")));
+			bwr = new BufferedWriter(new FileWriter(new File("lastRun.log")));
 			// write contents of StringBuffer to a file
 			bwr.write(sbf.toString());
 

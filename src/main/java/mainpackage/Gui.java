@@ -23,7 +23,6 @@ public class Gui extends JFrame {
 	private CreatorGui creatorPanel = null;
 	private ManagerGui managerPanel = null;
 
-
 	// Test commit
 	Gui() {
 		try {
@@ -35,13 +34,12 @@ public class Gui extends JFrame {
 
 		this.setBackground(Color.GREEN);
 
-		
 		creatorPanel = new CreatorGui(this);
 		managerPanel = new ManagerGui();
-		tabs=new JTabbedPane();
+		tabs = new JTabbedPane();
 		tabs.addTab("Create", creatorPanel);
 		tabs.addTab("Manage", managerPanel);
-		
+
 		// frame stuff
 		this.addComponentListener(new ComponentListener() {
 
@@ -88,18 +86,16 @@ public class Gui extends JFrame {
 		this.setVisible(true);
 	}
 
-	
-	
 	private void listFiles() {
 		// create a file that is really a directory
 		File aDirectory = new File(".");
-		
+
 		// get a listing of all files in the directory
 		String[] filesInDir = aDirectory.list();
-		
+
 		// sort the list of files (optional)
 		// Arrays.sort(filesInDir);
-		
+
 		// have everything i need, just print it now
 		for (int i = 0; i < filesInDir.length; i++) {
 			Alert.consoleLog("file: " + filesInDir[i]);
@@ -109,16 +105,16 @@ public class Gui extends JFrame {
 	public JFrame getFrame() {
 		return this;
 	}
-	
+
 	protected void repaintGui() {
 		this.revalidate();
 		this.repaint();
 	}
 
 	/*
-
-	 */
 	
+	 */
+
 	/*
 	 * private void readGifsLog() { // Deserialization try { // Reading the
 	 * object from a file FileInputStream gifsLogFile = new

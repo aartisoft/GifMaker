@@ -4,6 +4,7 @@ package mainpackage;
 
 //import javax.rmi.CORBA.Util;
 import javax.swing.*;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class ManagerGui extends JPanel{
 	private Configs cfg = new Configs();
@@ -51,6 +53,7 @@ public class ManagerGui extends JPanel{
 	private JPanel newGIFsPanel = null;
 	private List<JLabel> listOfLabels = new ArrayList<JLabel>();
 	private List<JTextField> listOfTextFields = new ArrayList<JTextField>();
+	private List<String> words = null;
 
 	// private int tempCounter = 2;
 
@@ -66,6 +69,9 @@ public class ManagerGui extends JPanel{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception ex) {
 		}
+		
+		words = new ArrayList<>();
+		words.addAll(getSubSet(""));
 
 		setupIMGpanel();
 		setupButtonsAndTextField();
@@ -73,6 +79,32 @@ public class ManagerGui extends JPanel{
 		// setupNewFilesList();
 		setupPanels();
 		// utils.createAudioFilesJsonFile();
+	}
+	
+	public TreeSet<String> getSubSet(String sub) {
+//		-------------||||||||||||tagsCopy is empthy - get all tags |||||||||||||||<<-------------
+		Alert.consoleLog(gifsCollection.getAllTags().size());
+		if(sub.isEmpty())
+			return gifsCollection.getAllTags();
+		TreeSet<String> subset = new TreeSet<String>();
+
+		for (String s : gifsCollection.getAllTags()) {
+			if (s.length() >= sub.length() && s.toLowerCase().substring(0, sub.length()).contains(sub.toLowerCase())) {
+				subset.add(s);
+			}
+		}
+
+		Alert.consoleLog(subset.toString());
+		return subset;
+	}
+	
+	private List<String> getSuggestions(String input) {
+		// the suggestion provider can control text search related stuff, e.g
+		// case insensitive match, the search limit etc.
+		if (input.isEmpty()) {
+			return null;
+		}
+		return words.stream().filter(s -> s.startsWith(input)).limit(20).collect(Collectors.toList());
 	}
 
 	private void checkForNewFiles() {
@@ -206,6 +238,7 @@ public class ManagerGui extends JPanel{
 		pasteBtn.addActionListener(norris);
 		renewImgBtn.addActionListener(norris);
 		textInput.setToolTipText("enter tag");
+		SuggestionDropDownDecorator.decorate(textInput, new TextComponentWordSuggestionClient(this::getSuggestions));
 		textInput.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -220,7 +253,7 @@ public class ManagerGui extends JPanel{
 		});
 
 	}
-
+	
 	private void setupIMGs() {
 		// System.out.println("setupIMGs()");
 		Alert.consoleLog(".");

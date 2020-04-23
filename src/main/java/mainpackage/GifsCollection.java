@@ -57,6 +57,10 @@ public class GifsCollection {
 		return gifsMap;
 	}
 
+	public TreeSet<String> getAllTags(){
+		return tags;
+	}
+	
 	public int getNumberOfGifs() {
 		return gifsMap.size();
 	}

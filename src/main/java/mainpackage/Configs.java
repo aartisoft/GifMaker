@@ -1,9 +1,7 @@
 package mainpackage;
 
-import java.awt.Dimension;
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Configs {
 
